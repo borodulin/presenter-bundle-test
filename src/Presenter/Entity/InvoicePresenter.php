@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Presenter\Entity\Internal;
+namespace App\Presenter\Entity;
 
 use App\Entity\Invoice;
 use Borodulin\PresenterBundle\Attribute\AsPresenterHandler;
 use Borodulin\PresenterBundle\PresenterHandler\PresenterHandlerInterface;
 
-#[AsPresenterHandler(group: 'internal')]
+#[AsPresenterHandler]
 class InvoicePresenter
 {
     public function __invoke(Invoice $invoice): array
     {
         return [
-            'invoice_id' => $invoice->getId(),
+            'invoiceId' => $invoice->getId(),
             'total' => $invoice->getTotal(),
         ];
     }
