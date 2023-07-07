@@ -7,45 +7,48 @@ namespace App\Entity;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table(name: 'Track')]
 #[ORM\Entity(repositoryClass: TrackRepository::class)]
 class Track
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(name: 'TrackId', type: 'integer')]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private int $id;
 
-    #[ORM\Column(name: 'Name', type: 'string', length: 200)]
+    #[ORM\Column(type: 'string', length: 200)]
     private string $name;
 
     #[ORM\ManyToOne(targetEntity: Album::class)]
-    #[ORM\JoinColumn(name: 'AlbumId', referencedColumnName: 'AlbumId')]
     private ?Album $album = null;
 
     #[ORM\ManyToOne(targetEntity: MediaType::class)]
-    #[ORM\JoinColumn(name: 'MediaTypeId', referencedColumnName: 'MediaTypeId')]
     private ?MediaType $mediaType = null;
 
     #[ORM\ManyToOne(targetEntity: Genre::class)]
-    #[ORM\JoinColumn(name: 'GenreId', referencedColumnName: 'GenreId')]
     private ?Genre $genre = null;
 
-    #[ORM\Column(name: 'Composer', type: 'string', length: 220, nullable: true)]
+    #[ORM\Column(type: 'string', length: 220, nullable: true)]
     private ?string $composer = null;
 
-    #[ORM\Column(name: 'Milliseconds', type: 'integer')]
+    #[ORM\Column(type: 'integer')]
     private int $milliseconds;
 
-    #[ORM\Column(name: 'Bytes', type: 'integer')]
+    #[ORM\Column(type: 'integer')]
     private int $bytes;
 
-    #[ORM\Column(name: 'UnitPrice', type: 'decimal', precision: 10, scale: 2)]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private float $unitPrice;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getName(): string

@@ -12,7 +12,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@github.com:22/borodulin/presenter-bundle.git",
-                "reference": "f9346ce241bac3b48c2dd46a49cbdf242e5d4284"
+                "reference": "bbbd8fe35ca9ccde1fcffeffdb9e3af98a644148"
             },
             "require": {
                 "doctrine/orm": "^2.7",
@@ -58,7 +58,7 @@
                 }
             ],
             "description": "Presenter Bundle",
-            "time": "2023-07-06T07:28:53+00:00"
+            "time": "2023-07-07T09:48:30+00:00"
         },
         {
             "name": "doctrine/cache",

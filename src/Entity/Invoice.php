@@ -8,38 +8,37 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table(name: 'Invoice')]
 #[ORM\Entity]
 class Invoice
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(name: 'InvoiceId', type: 'integer')]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: Customer::class)]
-    #[ORM\JoinColumn(name: 'CustomerId', referencedColumnName: 'CustomerId', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private Customer $customer;
 
-    #[ORM\Column(name: 'InvoiceDate', type: 'datetime')]
-    private ?\DateTimeInterface $invoiceDate = null;
+    #[ORM\Column(type: 'datetime')]
+    private \DateTimeInterface $invoiceDate;
 
-    #[ORM\Column(name: 'BillingAddress', type: 'string', length: 70)]
+    #[ORM\Column(type: 'string', length: 70, nullable: true)]
     private ?string $billingAddress = null;
 
-    #[ORM\Column(name: 'BillingCity', type: 'string', length: 40)]
+    #[ORM\Column(type: 'string', length: 40, nullable: true)]
     private ?string $billingCity = null;
 
-    #[ORM\Column(name: 'BillingState', type: 'string', length: 40)]
+    #[ORM\Column(type: 'string', length: 40, nullable: true)]
     private ?string $billingState = null;
 
-    #[ORM\Column(name: 'BillingCountry', type: 'string', length: 40)]
+    #[ORM\Column(type: 'string', length: 40, nullable: true)]
     private ?string $billingCountry = null;
 
-    #[ORM\Column(name: 'BillingPostalCode', type: 'string', length: 10)]
+    #[ORM\Column(type: 'string', length: 10, nullable: true)]
     private ?string $billingPostalCode = null;
 
-    #[ORM\Column(name: 'Total', type: 'decimal', precision: 10, scale: 2)]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private float $total;
 
     #[ORM\OneToMany(mappedBy: 'invoice', targetEntity: InvoiceLine::class)]
@@ -50,9 +49,16 @@ class Invoice
         $this->lines = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getCustomer(): Customer
@@ -67,12 +73,12 @@ class Invoice
         return $this;
     }
 
-    public function getInvoiceDate(): ?\DateTimeInterface
+    public function getInvoiceDate(): \DateTimeInterface
     {
         return $this->invoiceDate;
     }
 
-    public function setInvoiceDate(?\DateTimeInterface $invoiceDate): self
+    public function setInvoiceDate(\DateTimeInterface $invoiceDate): self
     {
         $this->invoiceDate = $invoiceDate;
 

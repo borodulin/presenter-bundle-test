@@ -6,61 +6,66 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table(name: 'Employee')]
 #[ORM\Entity]
 class Employee
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(name: 'EmployeeId', type: 'integer')]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private int $id;
 
-    #[ORM\Column(name: 'FirstName', type: 'string', length: 20)]
+    #[ORM\Column(type: 'string', length: 20)]
     private string $firstName;
 
-    #[ORM\Column(name: 'LastName', type: 'string', length: 20)]
+    #[ORM\Column(type: 'string', length: 20)]
     private string $lastName;
 
-    #[ORM\Column(name: 'Title', type: 'string', length: 30)]
+    #[ORM\Column(type: 'string', length: 30)]
     private string $title;
 
-    #[ORM\Column(name: 'BirthDate', type: 'datetime', nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $birthDate = null;
 
-    #[ORM\Column(name: 'HireDate', type: 'datetime', nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $hireDate = null;
 
-    #[ORM\Column(name: 'Address', type: 'string', length: 70, nullable: true)]
+    #[ORM\Column(type: 'string', length: 70, nullable: true)]
     private ?string $address = null;
 
-    #[ORM\Column(name: 'City', type: 'string', length: 40, nullable: true)]
+    #[ORM\Column(type: 'string', length: 40, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(name: 'State', type: 'string', length: 40, nullable: true)]
+    #[ORM\Column(type: 'string', length: 40, nullable: true)]
     private ?string $state = null;
 
-    #[ORM\Column(name: 'Country', type: 'string', length: 40, nullable: true)]
+    #[ORM\Column(type: 'string', length: 40, nullable: true)]
     private ?string $country = null;
 
-    #[ORM\Column(name: 'PostalCode', type: 'string', length: 10, nullable: true)]
+    #[ORM\Column(type: 'string', length: 10, nullable: true)]
     private ?string $postalCode = null;
 
-    #[ORM\Column(name: 'Phone', type: 'string', length: 24, nullable: true)]
+    #[ORM\Column(type: 'string', length: 24, nullable: true)]
     private ?string $phone = null;
 
-    #[ORM\Column(name: 'Fax', type: 'string', length: 24, nullable: true)]
+    #[ORM\Column(type: 'string', length: 24, nullable: true)]
     private ?string $fax = null;
 
-    #[ORM\Column(name: 'Email', type: 'string', length: 60)]
+    #[ORM\Column(type: 'string', length: 60)]
     private string $email;
 
     #[ORM\ManyToOne(targetEntity: self::class)]
-    #[ORM\JoinColumn(name: 'ReportsTo')]
     private ?Employee $reportsTo = null;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getFirstName(): string

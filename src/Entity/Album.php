@@ -7,25 +7,31 @@ namespace App\Entity;
 use App\Repository\AlbumRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table(name: 'Album')]
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
 class Album
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(name: 'AlbumId', type: 'integer')]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private int $id;
 
-    #[ORM\Column(name: 'Title', type: 'string', length: 160)]
+    #[ORM\Column(type: 'string', length: 160)]
     private string $title;
 
     #[ORM\ManyToOne(targetEntity: Artist::class)]
-    #[ORM\JoinColumn(name: 'ArtistId', referencedColumnName: 'ArtistId', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private Artist $artist;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getTitle(): string

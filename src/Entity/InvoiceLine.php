@@ -6,32 +6,38 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table(name: 'InvoiceLine')]
 #[ORM\Entity]
 class InvoiceLine
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(name: 'InvoiceLineId', type: 'integer')]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: Invoice::class, inversedBy: 'lines')]
-    #[ORM\JoinColumn(name: 'InvoiceId', referencedColumnName: 'InvoiceId', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private Invoice $invoice;
 
     #[ORM\ManyToOne(targetEntity: Track::class)]
-    #[ORM\JoinColumn(name: 'TrackId', referencedColumnName: 'TrackId', nullable: false)]
+    #[ORM\JoinColumn(nullable: false)]
     private Track $track;
 
-    #[ORM\Column(name: 'UnitPrice', type: 'decimal', precision: 10, scale: 2)]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private float $unitPrice;
 
-    #[ORM\Column(name: 'Quantity', type: 'integer')]
+    #[ORM\Column(type: 'integer')]
     private int $quantity;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getInvoice(): Invoice
