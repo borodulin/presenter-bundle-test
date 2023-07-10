@@ -6,7 +6,6 @@ namespace App\Presenter\Entity\Internal;
 
 use App\Entity\Invoice;
 use Borodulin\PresenterBundle\Attribute\AsPresenterHandler;
-use Borodulin\PresenterBundle\PresenterHandler\PresenterHandlerInterface;
 
 #[AsPresenterHandler(group: 'internal')]
 class InvoicePresenter

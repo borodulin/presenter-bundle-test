@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
-use App\Entity\Album;
-use App\Entity\Artist;
 use App\Entity\Customer;
 use App\Entity\Employee;
 use Doctrine\Bundle\FixturesBundle\Fixture;

@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Trait\IdTrait;
 use App\Repository\AlbumRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
 class Album
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(type: 'integer')]
-    private int $id;
+    use IdTrait;
 
     #[ORM\Column(type: 'string', length: 160)]
     private string $title;
@@ -21,18 +19,6 @@ class Album
     #[ORM\ManyToOne(targetEntity: Artist::class)]
     #[ORM\JoinColumn(nullable: false)]
     private Artist $artist;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     public function getTitle(): string
     {

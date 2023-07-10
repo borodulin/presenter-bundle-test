@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Trait\IdTrait;
 use App\Repository\TrackRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TrackRepository::class)]
 class Track
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(type: 'integer')]
-    private int $id;
+    use IdTrait;
 
     #[ORM\Column(type: 'string', length: 200)]
     private string $name;
@@ -38,18 +36,6 @@ class Track
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     private float $unitPrice;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     public function getName(): string
     {

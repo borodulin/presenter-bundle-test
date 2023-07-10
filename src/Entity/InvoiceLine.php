@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Trait\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 class InvoiceLine
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(type: 'integer')]
-    private int $id;
+    use IdTrait;
 
     #[ORM\ManyToOne(targetEntity: Invoice::class, inversedBy: 'lines')]
     #[ORM\JoinColumn(nullable: false)]
@@ -27,18 +25,6 @@ class InvoiceLine
 
     #[ORM\Column(type: 'integer')]
     private int $quantity;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     public function getInvoice(): Invoice
     {

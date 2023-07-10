@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Trait\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 class Employee
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(type: 'integer')]
-    private int $id;
+    use IdTrait;
 
     #[ORM\Column(type: 'string', length: 20)]
     private string $firstName;
@@ -55,18 +53,6 @@ class Employee
 
     #[ORM\ManyToOne(targetEntity: self::class)]
     private ?Employee $reportsTo = null;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     public function getFirstName(): string
     {
