@@ -13,7 +13,7 @@ class InvoicePresenter
     public function __invoke(Invoice $invoice): array
     {
         return [
-            'invoice_id' => $invoice->getId(),
+            'invoiceId' => $invoice->getId(),
             'total' => $invoice->getTotal(),
         ];
     }

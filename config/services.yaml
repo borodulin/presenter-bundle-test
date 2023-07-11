@@ -26,3 +26,7 @@ services:
     App\Infrastructure\ArgumentResolver\EntityArgumentResolver:
         tags:
             - { name: controller.argument_value_resolver, priority: 150 }
+    internal_name_converter:
+        class:  Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+        tags:
+            - { name: presenter.name_converter, group: internal }
